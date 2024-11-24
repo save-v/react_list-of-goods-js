@@ -35,7 +35,7 @@ function getPreparedGoods(goods, sortParameter) {
 }
 
 export const App = () => {
-  const [isReversed, setReversed] = useState(false);
+  const [isReversed, setIsReversed] = useState(false);
   const [sortParameter, setSortParameter] = useState('');
 
   const goods = getPreparedGoods([...goodsFromServer], sortParameter);
@@ -52,7 +52,7 @@ export const App = () => {
             setSortParameter(SORT_BY_ALPHABET);
           }}
           type="button"
-          className={`button is-warning ${sortParameter !== SORT_BY_ALPHABET ? 'is-light' : ''}`}
+          className={`button is-info ${sortParameter !== SORT_BY_ALPHABET ? 'is-light' : ''}`}
         >
           Sort alphabetically
         </button>
@@ -62,14 +62,14 @@ export const App = () => {
             setSortParameter(SORT_BY_LENGTH);
           }}
           type="button"
-          className={`button is-warning ${sortParameter !== SORT_BY_LENGTH ? 'is-light' : ''}`}
+          className={`button is-success ${sortParameter !== SORT_BY_LENGTH ? 'is-light' : ''}`}
         >
           Sort by length
         </button>
 
         <button
           onClick={() => {
-            setReversed(!isReversed);
+            setIsReversed(!isReversed);
           }}
           type="button"
           className={`button is-warning ${!isReversed ? 'is-light' : ''}`}
@@ -80,7 +80,7 @@ export const App = () => {
           <button
             onClick={() => {
               setSortParameter('');
-              setReversed(false);
+              setIsReversed(false);
             }}
             type="button"
             className="button is-danger is-light"
@@ -92,7 +92,9 @@ export const App = () => {
 
       <ul>
         {goods.map(good => (
-          <li data-cy="Good">{good}</li>
+          <li key={good.name} data-cy="Good">
+            {good}
+          </li>
         ))}
       </ul>
     </div>
